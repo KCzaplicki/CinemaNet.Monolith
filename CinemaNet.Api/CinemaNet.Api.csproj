@@ -10,4 +10,10 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CinemaNet.Abstractions\CinemaNet.Abstractions.csproj" />
+      <ProjectReference Include="..\CinemaNet.Common\CinemaNet.Common.csproj" />
+      <ProjectReference Include="..\CinemaNet.Infrastructure\CinemaNet.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

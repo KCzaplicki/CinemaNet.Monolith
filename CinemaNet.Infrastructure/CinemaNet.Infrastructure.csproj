@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CinemaNet.Abstractions\CinemaNet.Abstractions.csproj" />
+      <ProjectReference Include="..\CinemaNet.Common\CinemaNet.Common.csproj" />
+      <ProjectReference Include="..\CinemaNet.Persistence\CinemaNet.Persistence.csproj" />
+    </ItemGroup>
+
 </Project>
