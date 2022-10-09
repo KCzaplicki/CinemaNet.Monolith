@@ -1,0 +1,19 @@
+<div class="flex flex-row my-4">
+    <img class="movie-picture mr-6" src="{{movie.pictureUrl}}">
+    <div class="ml-5">
+        <div class="text-lg">{{movie.name}}</div>
+        <div class="pt-2 flex flex-row">
+            <div class="mr-2">{{movie.category}}</div>
+            <mat-divider vertical></mat-divider>
+            <div class="mx-2">{{movie.duration}} min</div>
+            <mat-divider vertical></mat-divider>
+            <div class="ml-2">{{movie.releaseDate | date:'dd-MM-yyy' }}</div>
+        </div>
+        <div class="movie-description leading-7 mt-2">
+            {{ movie.description | sliceText:370 }}
+        </div>
+        <div class="text-right mr-4">
+            <a mat-button [routerLink]="['/movies', movie.id]">Read more</a>
+        </div>
+    </div>
+</div>

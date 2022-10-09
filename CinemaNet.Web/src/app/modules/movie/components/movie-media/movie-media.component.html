@@ -1,0 +1,10 @@
+<div class="text-center">
+    <lightgallery [settings]="settings">
+        <a *ngFor="let mediaUrl of mediaUrls; let i = index" [attr.href]="mediaUrl">
+            <ng-container *ngIf="i == 0">
+                <img class="movie-media mb-1" src="{{mediaUrl}}" />
+                <button mat-button>See more</button>
+            </ng-container>
+        </a>
+    </lightgallery>
+</div>
