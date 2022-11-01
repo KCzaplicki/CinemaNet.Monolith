@@ -8,6 +8,7 @@ public class MovieStaff
     
     public string StaffId { get; set; }
     
+    
     public Movie Movie { get; set; }
 
     public Staff Staff { get; set; }

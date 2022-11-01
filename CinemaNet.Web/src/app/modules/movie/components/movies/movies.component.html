@@ -1,4 +1,13 @@
-<div class="mt-2 mx-auto main-container" *ngFor="let movie of movies">
-    <app-movie [movie]="movie"></app-movie>
-    <mat-divider></mat-divider>
+<div class="mt-2 mx-auto main-container">
+    <app-movie-day-selector [selected]="selectedDay"></app-movie-day-selector>
+    <mat-divider class="pb-4"></mat-divider>
+    <div class="movie-item" *ngFor="let movie of movies | filterMovieByScreeningDay:selectedDay">
+        <app-movie [movie]="movie" [screeningsDay]="selectedDay"></app-movie>
+        <mat-divider></mat-divider>
+    </div>
+    <div *ngIf="(movies | filterMovieByScreeningDay:selectedDay).length == 0" class="text-center empty-day-container">
+        <mat-icon fontIcon="calendar_today" class="mb-2"></mat-icon>
+        <div class="header">No movies for selected day</div>
+        <div class="description">Please try to select a different day to see the movie lineup.</div>
+    </div>
 </div>

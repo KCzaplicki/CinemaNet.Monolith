@@ -1,4 +1,5 @@
-﻿using CinemaNet.Abstractions.Repositories;
+﻿using CinemaNet.Abstractions.Models.Movie;
+using CinemaNet.Abstractions.Repositories;
 using CinemaNet.Infrastructure.Mapping.Resolvers;
 using CinemaNet.Infrastructure.Persistence;
 using CinemaNet.Infrastructure.Repositories;
@@ -15,6 +16,8 @@ public static class Module
         services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Module).Assembly));
         services.AddTransient<DirectorResolver>();
         services.AddTransient<StaffResolver>();
+        services.AddTransient<MovieScreeningResolver<Movie>>();
+        services.AddTransient<MovieScreeningResolver<MovieDetails>>();
         
         services.AddDbContext<CinemaNetContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("CinemaNetContext")));

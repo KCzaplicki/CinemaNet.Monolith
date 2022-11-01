@@ -1,0 +1,13 @@
+.day-selector:not(:last-of-type) .mat-divider {
+    display: inline;
+}
+
+.day-selector .selected-day {
+    font-size: 0.96rem;
+    font-weight: 500;
+}
+
+.day-selector .disabled {
+    color: #757575;
+    pointer-events: none;
+}

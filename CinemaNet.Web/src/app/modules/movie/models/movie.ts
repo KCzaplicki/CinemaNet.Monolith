@@ -1,3 +1,5 @@
+import { MovieScreenings } from "./movie-screenings";
+
 export class Movie {
     public id!: string;
     public name!: string;
@@ -6,4 +8,5 @@ export class Movie {
     public category!: string;
     public description!: string;
     public pictureUrl!: string;
+    public screenings!: MovieScreenings[];
 }

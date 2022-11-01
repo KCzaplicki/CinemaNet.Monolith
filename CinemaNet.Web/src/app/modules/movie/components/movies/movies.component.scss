@@ -1,0 +1,23 @@
+.empty-day-container {
+    margin-top: 80px;
+}
+
+.empty-day-container .mat-icon {
+    font-size: 36px;
+    height: 36px;
+    width: 36px;
+    margin-bottom: 10px;
+}
+
+.empty-day-container .header {
+    margin-bottom: 3px;
+}
+
+.empty-day-container .description {
+    font-size: 12px;
+    color: #616161;
+}
+
+.movie-item:last-of-type .mat-divider {
+    display: none;
+}

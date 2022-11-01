@@ -22,17 +22,28 @@ public class MovieReadOnlyRepository : IMovieReadOnlyRepository
     public bool Exists(string id) => 
         _movies.Any(m => m.Id == id);
     
-    public IList<Movie> GetWeeklyMovies() =>
-        _movies.Where(m => m.State == MovieState.Published)
+    public IList<Movie> GetWeeklyMovies()
+    {
+        var movies = _movies.Where(m => m.State == MovieState.Published)
+            .OrderByDescending(m => m.ReleaseDate)
             .Include(m => m.Category)
             .Include(m => m.Media)
+            .Include(m => m.Screenings)
             .ToList();
 
-    public Movie GetMovieDetails(string id) =>
-        _movies
+        return movies;
+    }
+    
+    public Movie GetMovieDetails(string id)
+    {
+        var movie = _movies
             .Include(m => m.Category)
             .Include(m => m.Media)
+            .Include(m => m.Screenings)
             .Include(m => m.Staff)
             .ThenInclude(s => s.Staff)
             .FirstOrDefault(m => m.Id == id);
+
+        return movie;
+    }
 }
