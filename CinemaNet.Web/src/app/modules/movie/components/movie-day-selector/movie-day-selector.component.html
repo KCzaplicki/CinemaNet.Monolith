@@ -1,0 +1,12 @@
+<div class="pt-1 pb-3 flex flex-row items-baseline">
+    <div class="mx-3">
+        <mat-icon fontIcon="calendar_month" class="text-base align-bottom"></mat-icon>
+    </div>
+    <div class="day-selector" *ngFor="let day of days">
+        <a class="mx-5"
+           [routerLink]="['/movies']" 
+           [queryParams]="{day: day.date | date:'d-MM-yyy'}"
+           [ngClass]="{'selected-day': day.date.getDate() == selected.getDate(), 'disabled': !day.available}">{{day.date | date:'EEEE d.MM'}}</a>
+        <mat-divider vertical></mat-divider>
+    </div>
+</div>

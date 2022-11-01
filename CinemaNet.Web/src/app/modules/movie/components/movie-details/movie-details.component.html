@@ -28,9 +28,15 @@
                     <div *ngFor="let person of movieDetails.staff">{{person}}</div>
                 </div>
             </div>
+            <div class="mt-4">
+                <div class="text-base mb-3">Screenings</div>
+                <div class="mb-4 -ml-1" *ngFor="let screening of movieDetails.screenings">
+                    <app-movie-daily-screenings [screenings]="screening"></app-movie-daily-screenings>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="text-center mt-6">
+    <div class="text-center my-4">
         <a mat-button [routerLink]="['/movies']">Back to movies</a>
     </div>
 </div>

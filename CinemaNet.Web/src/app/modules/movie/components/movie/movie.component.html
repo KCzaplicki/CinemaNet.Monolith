@@ -12,6 +12,9 @@
         <div class="movie-description leading-7 mt-2">
             {{ movie.description | sliceText:370 }}
         </div>
+        <div>
+            <app-movie-daily-screenings [screenings]="((movie.screenings | filterByScreeningDay:screeningsDay)[0])"></app-movie-daily-screenings>
+        </div>
         <div class="text-right mr-4">
             <a mat-button [routerLink]="['/movies', movie.id]">Read more</a>
         </div>

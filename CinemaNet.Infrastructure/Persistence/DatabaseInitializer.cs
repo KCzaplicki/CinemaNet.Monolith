@@ -1,4 +1,5 @@
-﻿using CinemaNet.Persistence.Models;
+﻿using CinemaNet.Abstractions;
+using CinemaNet.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaNet.Infrastructure.Persistence;
@@ -16,13 +17,9 @@ public static class DatabaseInitializer
         try
         {
             await AddCategoriesAsync(context);
-            await context.SaveChangesAsync();
-
-            await AddStaffAsync(context);
-            await context.SaveChangesAsync();
-
+            await AddStavesAsync(context);
+            await AddCinemaHallsAsync(context);
             await AddMoviesAsync(context);
-            await context.SaveChangesAsync();
 
             await transaction.CommitAsync();
         }
@@ -32,9 +29,31 @@ public static class DatabaseInitializer
         }
     }
 
+    private static async Task AddCinemaHallsAsync(CinemaNetContext context)
+    {
+        var cinemaHalls = new List<CinemaHall>
+        {
+            new()
+            {
+                Id = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                Name = "MockCinemaHall",
+                Type = "Mock",
+                CreationDate = DateTime.Now
+            }
+        };
+        
+        await context.AddRangeAsync(cinemaHalls);
+        await context.SaveChangesAsync();
+
+        foreach (var cinemaHall in cinemaHalls)
+        {
+            context.Entry(cinemaHall).State = EntityState.Detached;
+        }
+    }
+
     private static async Task AddMoviesAsync(CinemaNetContext context)
     {
-        var movies = new List<Movie>()
+        var movies = new List<Movie>
         {
             new()
             {
@@ -69,21 +88,105 @@ public static class DatabaseInitializer
                 {
                     new MovieStaff
                     {
-                        Role = "Director", 
+                        Role = Constants.StaffTypes.Director, 
                         MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B", 
                         StaffId = "293B9D98-5A91-4156-9DCF-B4608FEF64E4"
                     },
                     new MovieStaff
                     {
-                        Role = "Actor", 
+                        Role = Constants.StaffTypes.Actor, 
                         MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B", 
                         StaffId = "B5F26F84-B82F-40F9-8426-3C717296EE90"
                     },
                     new MovieStaff
                     {
-                        Role = "Actor", 
+                        Role = Constants.StaffTypes.Actor, 
                         MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B", 
                         StaffId = "432A49C1-6A33-4FBD-905F-A8C15BE32BA0"
+                    }
+                },
+                Screenings = new[]
+                {
+                    new Screening
+                    {
+                        Id = "7D650993-3A80-47FA-B3AE-181301183BC9",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(12),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(14)
+                    },
+                    new Screening
+                    {
+                        Id = "98E295B3-5182-477B-B1C8-D4C7617C4A74",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(16),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(18)
+                    },
+                    new Screening
+                    {
+                        Id = "18CF3BF5-3A8C-4E24-9E6B-43E2751EA3F5",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(22)
+                    },
+                    new Screening
+                    {
+                        Id = "EB99DBBC-575D-4849-AA05-DE4D52E2AC27",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(12),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(14)
+                    },
+                    new Screening
+                    {
+                        Id = "7FECE7DC-458A-45AF-958E-33DB6602C3E0",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(16),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(18)
+                    },
+                    new Screening
+                    {
+                        Id = "9629653B-4E10-4675-B8EC-CA37DFD8E0C1",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(22)
+                    },
+                    new Screening
+                    {
+                        Id = "17D7C454-DF00-4FE9-B976-72F8F333E960",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(12),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(14)
+                    },
+                    new Screening
+                    {
+                        Id = "BFB83C4A-2406-456A-8F17-183E1680AD5D",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(16),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(18)
+                    },
+                    new Screening
+                    {
+                        Id = "098278E8-4AF7-4F15-9E32-306DA7B6EED6",
+                        MovieId = "99023704-71BE-4A31-BF7A-C0C24569333B",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(22)
                     }
                 }
             },
@@ -109,21 +212,105 @@ public static class DatabaseInitializer
                 {
                     new MovieStaff
                     {
-                        Role = "Director",
+                        Role = Constants.StaffTypes.Director,
                         MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
                         StaffId = "A4429857-BA14-40F5-8EAB-B77CFF4CF89C"
                     },
                     new MovieStaff
                     {
-                        Role = "Actor",
+                        Role = Constants.StaffTypes.Actor,
                         MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
                         StaffId = "4D215C87-A6C7-48EC-B5A7-F514D65957D3"
                     },
                     new MovieStaff
                     {
-                        Role = "Actor",
+                        Role = Constants.StaffTypes.Actor,
                         MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
                         StaffId = "B3B7362E-DE54-4E27-9A31-F320409064A6"
+                    }
+                },
+                Screenings = new[]
+                {
+                    new Screening
+                    {
+                        Id = "70E3864D-AA25-49FC-993C-E11E5E7F99C8",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(10),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(12)
+                    },
+                    new Screening
+                    {
+                        Id = "A8CECE92-A7BC-4A76-ADFF-DB9DD292765D",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(15),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(17)
+                    },
+                    new Screening
+                    {
+                        Id = "364922D9-ED07-44FF-879D-811335244AAA",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddHours(22)
+                    },
+                    new Screening
+                    {
+                        Id = "8D89066E-17A0-4022-9517-3838C56BEF8C",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(10),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(12)
+                    },
+                    new Screening
+                    {
+                        Id = "2E873653-5335-4C9A-AD85-BD015413DDE9",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(15),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(17)
+                    },
+                    new Screening
+                    {
+                        Id = "CA2375B7-621E-4564-87E9-8B4AA88768E2",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(1).AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(1).AddHours(22)
+                    },
+                    new Screening
+                    {
+                        Id = "9FBDFEC1-0B1E-4A15-82C9-9AFB6B8AB750",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(10),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(12)
+                    },
+                    new Screening
+                    {
+                        Id = "0EC2AAE8-FC3E-4D46-9DCB-834ACD676D10",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(15),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(17)
+                    },
+                    new Screening
+                    {
+                        Id = "DAE96463-342C-4CC6-9730-AAF8379AAE25",
+                        MovieId = "EEC3CFC3-D1AC-4CA2-9F4D-8E2EA9A4C5A8",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        StartDate = DateTime.Now.Date.AddDays(2).AddHours(20),
+                        CreationDate = DateTime.Now,
+                        EndDate = DateTime.Now.Date.AddDays(2).AddHours(22)
                     }
                 }
             }
@@ -138,7 +325,7 @@ public static class DatabaseInitializer
         }
     }
 
-    private static async Task AddStaffAsync(CinemaNetContext context)
+    private static async Task AddStavesAsync(CinemaNetContext context)
     {
         var staves = new List<Staff>
         {

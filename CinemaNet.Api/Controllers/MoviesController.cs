@@ -3,8 +3,6 @@ using CinemaNet.Abstractions.Models.Movie;
 using CinemaNet.Abstractions.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-using MovieModel = CinemaNet.Persistence.Models.Movie;
-
 namespace CinemaNet.Api.Controllers;
 
 [ApiController]
@@ -28,7 +26,7 @@ public class MoviesController : ControllerBase
 
         return mappedMovies;
     }
-
+    
     [HttpGet("{id}")]
     public IActionResult GetMovieDetails(string id)
     {

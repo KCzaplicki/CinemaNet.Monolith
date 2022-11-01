@@ -22,4 +22,6 @@ public class Movie : AuditableEntity
     public IEnumerable<MovieStaff> Staff { get; set; }
     
     public IEnumerable<Media> Media { get; set; }
+    
+    public IEnumerable<Screening> Screenings { get; set; }
 }

@@ -1,3 +1,5 @@
+import { MovieScreenings } from "./movie-screenings";
+
 export class MovieDetails {
     public id!: string;
     public name!: string;
@@ -8,6 +10,7 @@ export class MovieDetails {
     public mediaUrls!: string[];
     public director!: string;
     public staff!: string[];
+    public screenings!: MovieScreenings[];
 
     public static createEmpty(): MovieDetails {
         return {
@@ -19,7 +22,8 @@ export class MovieDetails {
             description: '',
             mediaUrls: [],
             director: '',
-            staff: []
+            staff: [],
+            screenings: []
           }
     }
 }

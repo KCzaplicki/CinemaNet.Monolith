@@ -19,4 +19,6 @@ public class MovieDetails
     public string Director { get; init; }
     
     public string[] Staff { get; init; }
+    
+    public MovieScreenings[] Screenings { get; set; }
 }

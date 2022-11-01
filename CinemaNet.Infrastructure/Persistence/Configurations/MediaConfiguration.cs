@@ -9,6 +9,7 @@ public class MediaConfiguration : IEntityTypeConfiguration<Media>
     public void Configure(EntityTypeBuilder<Media> builder)
     {
         builder.Property(b => b.Url)
-               .IsRequired();
+               .IsRequired()
+               .HasMaxLength(1024);
     }
 }
