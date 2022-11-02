@@ -17,6 +17,10 @@ public class CinemaNetContext : DbContext
 
     public DbSet<Screening> Screenings { get; set; }
 
+    public DbSet<CinemaHall> CinemaHalls { get; set; }
+
+    public DbSet<CinemaHallRow> CinemaHallRows { get; set; }
+
     public CinemaNetContext(DbContextOptions<CinemaNetContext> options)
         : base(options)
     {

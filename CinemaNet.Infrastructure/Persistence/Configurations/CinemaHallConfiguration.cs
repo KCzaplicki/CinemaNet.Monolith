@@ -13,8 +13,5 @@ public class CinemaHallConfiguration : IEntityTypeConfiguration<CinemaHall>
         builder.Property(b => b.Name)
             .IsRequired()
             .HasMaxLength(100);
-        builder.Property(b => b.Type)
-            .IsRequired()
-            .HasMaxLength(100);
     }
 }

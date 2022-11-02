@@ -23,6 +23,7 @@ public static class Module
             options.UseSqlServer(configuration.GetConnectionString("CinemaNetContext")));
         
         services.AddScoped<IMovieReadOnlyRepository, MovieReadOnlyRepository>();
+        services.AddScoped<IScreeningReadOnlyRepository, ScreeningReadOnlyRepository>();
         
         return services;
     }

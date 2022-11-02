@@ -37,8 +37,82 @@ public static class DatabaseInitializer
             {
                 Id = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
                 Name = "MockCinemaHall",
-                Type = "Mock",
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                Rows = new CinemaHallRow[]
+                {
+                    new()
+                    {
+                        Id = "5eed8a1d-fcc6-48e6-ad21-0a3fee7e0c1a",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'A',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "17f44a18-b3df-40be-9d93-d1984e469cf2",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'B',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "9ff3b655-5883-47c1-af4f-5a7447378e91",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'C',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "51b0e0eb-a760-4ef4-b98b-003d5fc1d683",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'D',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "0ebe5fcf-4b4e-4ad7-b022-59a8a6871dd7",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'E',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "57211f44-3da8-412a-b27e-d5b32ffcace5",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'F',
+                        Seats = 12,
+                        Type = CinemaHallRowType.Premium
+                    },
+                    new()
+                    {
+                        Id = "344798b1-7ac1-4174-98eb-c55cc034445f",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'G',
+                        Seats = 12,
+                        Type = CinemaHallRowType.Premium
+                    },
+                    new()
+                    {
+                        Id = "bf7056cb-aadf-4c4f-b1b8-6710e84424de",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'H',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    },
+                    new()
+                    {
+                        Id = "1be450a2-d247-48d3-b253-333b7a661258",
+                        CinemaHallId = "A15CA383-5063-4FC1-97D7-FD1B1F822617",
+                        Letter = 'I',
+                        Seats = 16,
+                        Type = CinemaHallRowType.Normal
+                    }
+                }
             }
         };
         

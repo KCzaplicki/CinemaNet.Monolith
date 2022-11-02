@@ -6,8 +6,7 @@ public class CinemaHall : AuditableEntity
 {
     public string Name { get; set; }
 
-    public string Type { get; set; }
-    
-    
     public IEnumerable<Screening> Screenings { get; set; }
+    
+    public IEnumerable<CinemaHallRow> Rows { get; set; }
 }
